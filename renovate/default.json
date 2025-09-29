@@ -1,0 +1,21 @@
+{
+    "extends": [
+      "config:base",
+      ":separateMultipleMajorReleases",
+      ":timezone(Asia/Tokyo)",
+      "github>vspo-lab/config/renovate:schedule",
+      "github>vspo-lab/config/renovate:automergePin",
+      "github>vspo-lab/config/renovate:automergeTypesMinor",
+      "github>vspo-lab/config/renovate:groupLinters",
+      "github>vspo-lab/config/renovate:vulnerabilityAlerts",
+      "github>vspo-lab/config/renovate:pinGitHubActionDigests",
+      "github>vspo-lab/config/renovate:minimumReleaseAge"
+    ],
+    "labels": ["renovate"],
+    "npm": {
+      "rangeStrategy": "bump"
+    },
+    "vulnerabilityAlerts": {
+      "labels": ["security"]
+    }
+  }
