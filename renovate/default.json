@@ -9,7 +9,9 @@
       "github>vspo-lab/config/renovate:groupLinters",
       "github>vspo-lab/config/renovate:vulnerabilityAlerts",
       "github>vspo-lab/config/renovate:pinGitHubActionDigests",
-      "github>vspo-lab/config/renovate:minimumReleaseAge"
+      "github>vspo-lab/config/renovate:minimumReleaseAge",
+      "github>vspo-lab/config/renovate:aqua",
+      "github>aquaproj/aqua-renovate-config#2.9.0"
     ],
     "labels": ["renovate"],
     "npm": {

@@ -1,0 +1,9 @@
+{
+    "packageRules": [
+      {
+        "matchPackageNames": ["aquaproj/aqua-registry"],
+        "extends": ["schedule:earlyMondays"]
+      }
+    ]
+  }
+  
