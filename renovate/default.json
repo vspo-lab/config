@@ -1,6 +1,6 @@
 {
     "extends": [
-      "config:base",
+      "config:recommended",
       ":separateMultipleMajorReleases",
       ":timezone(Asia/Tokyo)",
       "github>vspo-lab/config/renovate:schedule",
@@ -16,8 +16,5 @@
     "labels": ["renovate"],
     "npm": {
       "rangeStrategy": "bump"
-    },
-    "vulnerabilityAlerts": {
-      "labels": ["security"]
     }
   }

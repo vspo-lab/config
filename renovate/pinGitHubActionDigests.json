@@ -1,9 +1,10 @@
 {
-    "packageRules": [
-      {
-        "matchDepTypes": ["action"],
-        "excludePackagePrefixes": ["actions/"],
-        "pinDigests": true
-      }
-    ]
-  }
+  "packageRules": [
+    {
+      "description": "Pin third-party actions to a digest; first-party actions/* are trusted by tag",
+      "matchDepTypes": ["action"],
+      "matchPackageNames": ["*", "!actions/**"],
+      "pinDigests": true
+    }
+  ]
+}
