@@ -1,6 +1,21 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-      "local>vspo-lab/config//renovate#v1.0.0"
-    ]
-  }
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["local>vspo-lab/config//renovate", ":dependencyDashboard"],
+  "baseBranches": ["main"],
+  "labels": ["dependencies"],
+  "prConcurrentLimit": 5,
+  "automerge": false,
+  "packageRules": [
+    {
+      "description": "This repository ships no runtime artifact: it contains Renovate presets and the workflow that validates them. Every update here is CI-only, so no change can alter product behavior in any consumer.",
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions",
+      "addLabels": ["no-runtime-impact"]
+    },
+    {
+      "description": "Presets pinned inside the config itself, such as aqua-renovate-config",
+      "matchDepTypes": ["preset"],
+      "addLabels": ["no-runtime-impact"]
+    }
+  ]
+}

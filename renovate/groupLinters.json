@@ -1,0 +1,28 @@
+{
+  "packageRules": [
+    {
+      "description": "Group linter and formatter updates into a single PR",
+      "groupName": "linters",
+      "matchPackageNames": [
+        "@biomejs/biome",
+        "biome",
+        "eslint",
+        "eslint-**",
+        "@eslint/**",
+        "@typescript-eslint/**",
+        "prettier",
+        "prettier-**",
+        "cspell",
+        "@cspell/**",
+        "knip",
+        "textlint",
+        "textlint-**",
+        "@textlint/**",
+        "markdownlint-cli2",
+        "markdownlint",
+        "stylelint",
+        "stylelint-**"
+      ]
+    }
+  ]
+}

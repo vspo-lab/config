@@ -1,9 +1,15 @@
 {
-    "packageRules": [
-      {
-        "matchDepTypes": ["action"],
-        "excludePackagePrefixes": ["actions/"],
-        "pinDigests": true
-      }
-    ]
-  }
+  "packageRules": [
+    {
+      "description": "Pin actions to a digest so a moved tag cannot change what runs",
+      "matchDepTypes": ["action"],
+      "pinDigests": true
+    },
+    {
+      "description": "First-party actions/* are trusted by tag. Kept as a separate later rule because Renovate rejects a '*' pattern combined with a negation in matchPackageNames.",
+      "matchDepTypes": ["action"],
+      "matchPackageNames": ["actions/**"],
+      "pinDigests": false
+    }
+  ]
+}

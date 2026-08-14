@@ -5,26 +5,47 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
+# Serialized per ref and cancelled on supersede: a Renovate rebase should not
+# leave the previous run going.
+concurrency:
+  group: validate-config-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     env:
       CI: true
 
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: 22.x
-      - uses: actions/cache@v4
+          node-version: 24.x
+      - uses: actions/cache@v6
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node
-      - name: Validate renovate config
+
+      # renovate-config-validator does not resolve remote presets, so a preset
+      # that is extended but does not exist still validates. This check closes
+      # that gap; it is the regression guard for the missing groupLinters and
+      # vulnerabilityAlerts presets.
+      - name: Check internal preset references resolve
+        run: ./scripts/check-preset-references.sh
+
+      - name: Validate each preset
         run: |
           for file in ./renovate/*.json*
           do
             echo "[CI] Let's validate $file"
             RENOVATE_CONFIG_FILE=${file} npx --package renovate -c 'renovate-config-validator'
           done
+
+      - name: Validate the entrypoint config
+        run: npx --package renovate -c 'renovate-config-validator'
