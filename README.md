@@ -8,18 +8,24 @@ a consumer; it can only change which dependency PRs get raised, and how.
 
 ## Consuming
 
-Extend the directory preset from a repository's `renovate.json`:
+Extend the entrypoint preset from a repository's `renovate.json`:
 
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["local>vspo-lab/config//renovate"]
+  "extends": ["local>vspo-lab/config//renovate/default"]
 }
 ```
 
+Name the file explicitly, as above. `local>vspo-lab/config//renovate` looks like
+it points at the directory, but Renovate reads the trailing segment as a *file*
+name, so it fetches `renovate.json` from the repository root instead of
+`renovate/default.json` — this repository's own Renovate config, not the shared
+presets. The mistake is silent: a valid file loads, so nothing errors.
+
 Unpinned means the consumer always tracks `main`, so a change here takes effect
 on the next Renovate run without a follow-up PR in the consumer. To pin instead,
-append a tag: `local>vspo-lab/config//renovate#v1.0.0`.
+append a tag: `local>vspo-lab/config//renovate/default#v1.0.0`.
 
 Repository-local rules go in the consumer's own `renovate.json` after the
 `extends`, where they take precedence. Keep organization-wide policy here and
